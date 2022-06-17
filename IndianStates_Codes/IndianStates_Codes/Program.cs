@@ -8,12 +8,25 @@ namespace IndianStates_Codes
     {
         public static void Main(string[] args)
         {
-            string filePath = @"D:\.net\Indian-States---Census-Analyser\IndianStates_Codes\IndianStates_Codes\StateCensusData.csv";
-            
-            IndianStates_Codes.StatesAnalyser  sc = new IndianStates_Codes.StatesAnalyser();
+            StatesAnalyser getMethod = new StatesAnalyser();
+            Console.WriteLine("1 for State Census Analyser\n2 for State Code Analyser\nEnter a Number");
+            int userInput = Convert.ToInt32(Console.ReadLine());
+            switch (userInput)
+            {
+                case 1:
+                    {
+                        string filePath = @"D:\.net\Indian-States---Census-Analyser\IndianStates_Codes\IndianStates_Codes\StateCensusData.csv";
+                        getMethod.DataAnalyser(filePath);
+                        break;
+                    }
+                case 2:
+                    {
+                        string filePath = @"D:\.net\Indian-States---Census-Analyser\IndianStates_Codes\IndianStates_Codes\StateCode.csv";
+                        getMethod.StateCodeAnalyser(filePath);
+                        break;
+                    }
+            }
 
-            int obj = sc.DataAnalyser(filePath);
-            
         }
     }
 }

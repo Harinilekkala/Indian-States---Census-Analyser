@@ -15,35 +15,57 @@ namespace IndianStates_Codes
     {
         public int DataAnalyser(string filePath)
         {
-
-
-            try
+            if (Path.GetExtension(filePath) == ".csv")
             {
-
-                using (var reader = new StreamReader(filePath))
-                using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+                try
                 {
-                    var details = csv.GetRecords<StateModel>().ToList();
-                    var numberOfRecords = details.Count();
-                    foreach (var item in details)
+                    if (filePath.Contains("CensusData.csv"))
                     {
-                        Console.WriteLine("State: " + item.State + "\nPopulation: " + item.Population + "\nAreaInSqKm: " + item.AreaInSqKm
-                            + "\nDensityPerSqKm: " + item.DensityPerSqKm + "\n");
+                        int numberOfRecords;
+                        using (var reader = new StreamReader(filePath))
+                        using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+                        {
+                            var details = csv.GetRecords<StateModel>().ToList();
+                            numberOfRecords = details.Count();
+                            foreach (var item in details)
+                            {
+                                Console.WriteLine("State: " + item.State + "\nPopulation: " + item.Population + "\nAreaInSqKm: " + item.AreaInSqKm
+                                    + "\nDensityPerSqKm: " + item.DensityPerSqKm + "\n");
+                            }
+                        }
+                        return numberOfRecords;
                     }
-                    return numberOfRecords;
+                    throw new CustomException(CustomException.ExceptionType.INVALID_FILE, "Invalid File");
+                }
+                catch (CsvHelper.MissingFieldException)
+                {
+                    throw new CustomException(CustomException.ExceptionType.INCORRECT_DELIMITER, "Incorrect Delimiter");
+                }
+                catch (CsvHelper.HeaderValidationException)
+                {
+                    throw new CustomException(CustomException.ExceptionType.INCORRECT_HEADER, "Incorrect Header");
                 }
             }
-
-
-
-            catch
+            throw new CustomException(CustomException.ExceptionType.INVALID_FILE_TYPE, "Invalid File Type");
+        }
+        public int StateCodeAnalyser(string filePath)
+        {
+            int numberOfRecords;
+            using (var reader = new StreamReader(filePath))
+            using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
             {
-                throw new CustomException(CustomException.ExceptionType.INVALID_FILE, "Invalid File");
+                var details = csv.GetRecords<StateCode>().ToList();
+                numberOfRecords = details.Count();
+                foreach (var item in details)
+                {
+                    Console.WriteLine("SrNo: " + item.SrNo + "\nState: " + item.State + "\nName: " + item.Name
+                        + "\nTIN: " + item.TIN + "\nStateCode: " + item.StateCode + "\n");
+                }
             }
+            return numberOfRecords;
         }
     }
 
 
 
-    
 }
