@@ -8,11 +8,7 @@ namespace IndianStates_Codes
 {
     public class StateModel
     {
-        internal string Population;
 
-        public string State { get; internal set; }
-        public string DensityPerSqKm { get; internal set; }
-        public string AreaInSqKm { get; internal set; }
 
         public class StatesModel
         {
@@ -34,4 +30,4 @@ namespace IndianStates_Codes
 
 
     }
-}
+    }

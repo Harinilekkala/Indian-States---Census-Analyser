@@ -54,7 +54,7 @@ namespace IndianStates_Codes
             using (var reader = new StreamReader(filePath))
             using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
             {
-                var details = csv.GetRecords<StateCode>().ToList();
+                var details = csv.GetRecords<StateModel.StatesCode>().ToList();
                 numberOfRecords = details.Count();
                 foreach (var item in details)
                 {
