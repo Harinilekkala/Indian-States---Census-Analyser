@@ -46,7 +46,7 @@ namespace IndianStatesAndCode_Testing
                 Assert.AreEqual("Invalid File Type", ex.Message);
             }
         }
-        /*[Test]
+        [Test]
         public void GivenInvalidDelimiterFile_ShouldThrowInvalidDelimiterFileTypeException()
         {
             try
@@ -77,7 +77,7 @@ namespace IndianStatesAndCode_Testing
             {
                 Assert.AreEqual("Incorrect Header", ex.Message);
             }
-        }*/
+        }
 
     }
 }
