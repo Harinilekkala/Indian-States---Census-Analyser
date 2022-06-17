@@ -7,14 +7,19 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-  namespace IndianStates_Codes
+namespace IndianStates_Codes
 {
-    
-    
-        public class StatesAnalyser
+
+
+    public class StatesAnalyser
+    {
+        public int DataAnalyser(string filePath)
         {
-            public int DataAnalyser(string filePath)
+
+
+            try
             {
+
                 using (var reader = new StreamReader(filePath))
                 using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
                 {
@@ -28,7 +33,15 @@ using System.Threading.Tasks;
                     return numberOfRecords;
                 }
             }
+
+
+
+            catch
+            {
+                throw new CustomException(CustomException.ExceptionType.INVALID_FILE, "Invalid File");
+            }
         }
+    }
 
 
 
